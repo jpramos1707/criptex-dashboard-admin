@@ -15,7 +15,6 @@ export default function StatusBadge({ status, className }: StatusBadgeProps) {
         {
           "bg-green-900/50 text-green-400": status === "active",
           "bg-gray-800 text-gray-400": status === "inactive",
-          "bg-yellow-900/50 text-yellow-400": status === "pending",
         },
         className
       )}

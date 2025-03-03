@@ -1,6 +1,6 @@
 
 // User data types for the CriptexHub admin panel
-export type UserStatus = 'active' | 'inactive' | 'pending';
+export type UserStatus = 'active' | 'inactive';
 
 export interface User {
   id: string;

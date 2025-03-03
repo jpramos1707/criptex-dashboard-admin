@@ -6,11 +6,9 @@ import { Users as UsersIcon } from "lucide-react";
 import DashboardCard from "@/components/dashboard/DashboardCard";
 import { useState } from "react";
 import { User } from "@/lib/types";
-import { useToast } from "@/hooks/use-toast";
 
 const Users = () => {
   const [users, setUsers] = useState<User[]>(mockUsers);
-  const { toast } = useToast();
 
   const handleStatusChange = (userId: string, newStatus: 'active' | 'inactive') => {
     setUsers(prevUsers => 
@@ -18,14 +16,6 @@ const Users = () => {
         user.id === userId ? { ...user, status: newStatus } : user
       )
     );
-  };
-
-  const handleSaveChanges = () => {
-    // In a real app, this would send the updated data to an API
-    toast({
-      title: "Changes saved",
-      description: "All user status changes have been saved successfully.",
-    });
   };
 
   return (
@@ -38,12 +28,6 @@ const Users = () => {
               Users
             </h1>
           </div>
-          <button 
-            onClick={handleSaveChanges}
-            className="px-4 py-2 bg-criptex-500 text-white rounded-md hover:bg-criptex-600 transition-colors"
-          >
-            Save Changes
-          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
