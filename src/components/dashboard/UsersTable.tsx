@@ -1,20 +1,29 @@
 
-import { User } from "@/lib/types";
+import { User, UserStatus } from "@/lib/types";
 import StatusBadge from "./StatusBadge";
 import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Switch } from "@/components/ui/switch";
 
 interface UsersTableProps {
   users: User[];
+  onStatusChange?: (userId: string, newStatus: 'active' | 'inactive') => void;
 }
 
-export default function UsersTable({ users }: UsersTableProps) {
+export default function UsersTable({ users, onStatusChange }: UsersTableProps) {
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
       month: "short",
       day: "numeric",
     });
+  };
+
+  const handleStatusToggle = (user: User) => {
+    if (onStatusChange) {
+      const newStatus: UserStatus = user.status === 'active' ? 'inactive' : 'active';
+      onStatusChange(user.id, newStatus);
+    }
   };
 
   return (
@@ -75,7 +84,14 @@ export default function UsersTable({ users }: UsersTableProps) {
                     {user.user}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <StatusBadge status={user.status} />
+                    <div className="flex items-center gap-3">
+                      <StatusBadge status={user.status} />
+                      <Switch 
+                        checked={user.status === 'active'} 
+                        onCheckedChange={() => handleStatusToggle(user)}
+                        className="data-[state=checked]:bg-green-500 data-[state=unchecked]:bg-gray-500"
+                      />
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-right font-medium">
                     ${user.balance.toFixed(2)}
