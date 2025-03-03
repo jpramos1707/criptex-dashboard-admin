@@ -46,7 +46,7 @@ export const mockUsers: User[] = [
     user: 'emilyd',
     email: 'emily.davis@example.com',
     telephone: '+1 (555) 135-7931',
-    status: 'pending',
+    status: 'inactive',
     balance: 0.00,
     password: '********',
     created_at: '2023-09-10T16:48:33Z'
@@ -106,7 +106,7 @@ export const mockUsers: User[] = [
     user: 'wanderson',
     email: 'william.a@example.com',
     telephone: '+1 (555) 345-6789',
-    status: 'pending',
+    status: 'inactive',
     balance: 100.00,
     password: '********',
     created_at: '2023-09-25T17:41:38Z'
@@ -130,6 +130,5 @@ export const dashboardStats = {
   totalUsers: mockUsers.length,
   activeUsers: mockUsers.filter(user => user.status === 'active').length,
   inactiveUsers: mockUsers.filter(user => user.status === 'inactive').length,
-  pendingUsers: mockUsers.filter(user => user.status === 'pending').length,
   totalBalance: mockUsers.reduce((acc, user) => acc + user.balance, 0),
 };
