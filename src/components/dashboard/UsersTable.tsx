@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import { User } from "@/lib/types";
 import StatusBadge from "./StatusBadge";
 import { Eye } from "lucide-react";
@@ -10,18 +9,6 @@ interface UsersTableProps {
 }
 
 export default function UsersTable({ users }: UsersTableProps) {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const filteredUsers = users.filter((user) => {
-    const searchText = searchTerm.toLowerCase();
-    return (
-      user.name.toLowerCase().includes(searchText) ||
-      user.code.toLowerCase().includes(searchText) ||
-      user.email.toLowerCase().includes(searchText) ||
-      user.user.toLowerCase().includes(searchText)
-    );
-  });
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       year: "numeric",
@@ -32,17 +19,6 @@ export default function UsersTable({ users }: UsersTableProps) {
 
   return (
     <div className="rounded-lg border bg-card shadow-sm overflow-hidden animate-slide-in">
-      <div className="p-4 border-b">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="Search users..."
-            className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-criptex-500"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-      </div>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[800px]">
           <thead>
@@ -74,14 +50,14 @@ export default function UsersTable({ users }: UsersTableProps) {
             </tr>
           </thead>
           <tbody className="divide-y divide-border bg-card">
-            {filteredUsers.length === 0 ? (
+            {users.length === 0 ? (
               <tr>
                 <td colSpan={8} className="px-6 py-8 text-center text-muted-foreground">
-                  No users found matching your search.
+                  No users found.
                 </td>
               </tr>
             ) : (
-              filteredUsers.map((user) => (
+              users.map((user) => (
                 <tr
                   key={user.id}
                   className="hover:bg-muted/30 transition-colors"
