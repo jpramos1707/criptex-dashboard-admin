@@ -10,7 +10,7 @@ const UserProfile = () => {
   const user = mockUsers.find((user) => user.id === id);
 
   if (!user) {
-    return <Navigate to="/users" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return (
@@ -18,7 +18,7 @@ const UserProfile = () => {
       <div className="space-y-8">
         <div>
           <Link 
-            to="/users" 
+            to="/" 
             className="inline-flex items-center text-sm text-criptex-500 hover:text-criptex-400 mb-4"
           >
             <ChevronLeft className="h-4 w-4 mr-1" />

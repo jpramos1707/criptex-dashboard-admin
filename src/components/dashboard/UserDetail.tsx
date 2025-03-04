@@ -23,7 +23,7 @@ export default function UserDetail({ user }: UserDetailProps) {
     <div className="animate-fade-in">
       <div className="flex items-center mb-6">
         <Link
-          to="/users"
+          to="/"
           className="mr-3 p-2 rounded-full hover:bg-gray-100 transition-colors"
         >
           <ArrowLeft className="h-5 w-5" />

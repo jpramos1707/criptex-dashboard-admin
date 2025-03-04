@@ -67,18 +67,6 @@ export default function Navbar() {
               )}
               onClick={toggleMenu}
             >
-              Dashboard
-            </Link>
-            <Link
-              to="/users"
-              className={cn(
-                "block py-2 px-3 rounded-md text-base font-medium",
-                isActive("/users")
-                  ? "bg-accent text-white"
-                  : "text-gray-400 hover:text-white hover:bg-gray-800"
-              )}
-              onClick={toggleMenu}
-            >
               Users
             </Link>
           </div>

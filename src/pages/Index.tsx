@@ -1,55 +1,62 @@
 
-import { Users, Database, Shield } from "lucide-react";
 import Layout from "@/components/dashboard/Layout";
-import DashboardCard from "@/components/dashboard/DashboardCard";
 import UsersTable from "@/components/dashboard/UsersTable";
-import { mockUsers, dashboardStats } from "@/lib/mockData";
+import { mockUsers } from "@/lib/mockData";
+import { Users as UsersIcon } from "lucide-react";
+import DashboardCard from "@/components/dashboard/DashboardCard";
+import { useState } from "react";
+import { User } from "@/lib/types";
+import { toast } from "sonner";
 
 const Dashboard = () => {
+  const [users, setUsers] = useState<User[]>(mockUsers);
+
+  const handleStatusChange = (userId: string, newStatus: 'active' | 'inactive') => {
+    setUsers(prevUsers => 
+      prevUsers.map(user => 
+        user.id === userId ? { ...user, status: newStatus } : user
+      )
+    );
+    
+    toast.success(`User status updated successfully!`, {
+      description: `User ID: ${userId}`,
+    });
+  };
+
   return (
     <Layout>
       <div className="space-y-8">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-          <p className="text-muted-foreground mt-2">
-            Welcome to the CriptexHub admin dashboard.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <DashboardCard
-            title="Total Users"
-            value={dashboardStats.totalUsers}
-            icon={<Users className="h-5 w-5" />}
-            trend={{ value: 12, label: "vs last month", positive: true }}
-          />
-          <DashboardCard
-            title="Active Users"
-            value={dashboardStats.activeUsers}
-            icon={<Shield className="h-5 w-5" />}
-            trend={{ value: 8, label: "vs last month", positive: true }}
-          />
-          <DashboardCard
-            title="Total Balance"
-            value={`$${dashboardStats.totalBalance.toFixed(2)}`}
-            icon={<Database className="h-5 w-5" />}
-            trend={{ value: 3, label: "vs last month", positive: true }}
-          />
-        </div>
-
-        <div>
-          <h2 className="text-xl font-semibold mb-4">Recent Users</h2>
-          <UsersTable users={mockUsers.slice(0, 5)} />
-          
-          <div className="mt-4 text-center">
-            <a 
-              href="/users" 
-              className="text-criptex-600 hover:text-criptex-700 text-sm font-medium"
-            >
-              View all users →
-            </a>
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight flex items-center">
+              <UsersIcon className="h-8 w-8 mr-3 text-criptex-500" />
+              Users
+            </h1>
           </div>
         </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <DashboardCard 
+            title="Total Users" 
+            value={users.length}
+            textColor="text-criptex-500"
+          />
+          <DashboardCard 
+            title="Active Users" 
+            value={users.filter(user => user.status === 'active').length}
+            textColor="text-green-500"
+          />
+          <DashboardCard 
+            title="Inactive Users" 
+            value={users.filter(user => user.status === 'inactive').length}
+            textColor="text-yellow-500"
+          />
+        </div>
+
+        <UsersTable 
+          users={users} 
+          onStatusChange={handleStatusChange}
+        />
       </div>
     </Layout>
   );
