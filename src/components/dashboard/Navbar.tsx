@@ -26,7 +26,10 @@ export default function Navbar() {
 
   return (
     <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-fade-in border-gray-800"
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 animate-fade-in border-b",
+        isScrolled ? "bg-background/95 backdrop-blur-sm border-gray-800" : "border-transparent"
+      )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
