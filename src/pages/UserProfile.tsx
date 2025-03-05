@@ -77,6 +77,26 @@ const UserProfile = () => {
     toast.success("User information updated successfully!");
   };
 
+  // Toggle edit mode and ensure password change is turned off
+  const toggleEditMode = () => {
+    if (showPasswordChange) {
+      setShowPasswordChange(false);
+      setNewPassword("");
+    }
+    setIsEditing(!isEditing);
+  };
+
+  // Toggle password change and ensure edit mode is turned off
+  const togglePasswordChange = () => {
+    if (isEditing) {
+      setIsEditing(false);
+    }
+    setShowPasswordChange(!showPasswordChange);
+    if (showPasswordChange) {
+      setNewPassword("");
+    }
+  };
+
   return (
     <Layout>
       <div className="space-y-8">
@@ -121,15 +141,17 @@ const UserProfile = () => {
                 <div className="mt-4 flex justify-between">
                   <Button 
                     variant="outline"
-                    onClick={() => setIsEditing(!isEditing)}
-                    className="text-criptex-500"
+                    onClick={toggleEditMode}
+                    className={`text-criptex-500 ${showPasswordChange ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={showPasswordChange}
                   >
                     {isEditing ? "Cancel Editing" : "Edit User Information"}
                   </Button>
                   <Button 
                     variant="outline"
-                    onClick={() => setShowPasswordChange(!showPasswordChange)}
-                    className="flex items-center gap-2 text-criptex-500"
+                    onClick={togglePasswordChange}
+                    className={`flex items-center gap-2 text-criptex-500 ${isEditing ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={isEditing}
                   >
                     <Key className="h-4 w-4" />
                     {showPasswordChange ? "Cancel Password Change" : "Change Password"}
