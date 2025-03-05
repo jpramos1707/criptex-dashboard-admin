@@ -146,7 +146,7 @@ const UserProfile = () => {
                         value={newPassword}
                         onChange={(e) => setNewPassword(e.target.value)}
                         placeholder="New Password"
-                        className="flex-1 px-3 py-2 border rounded-md"
+                        className="flex-1 px-3 py-2 border border-gray-600 rounded-md bg-gray-800 text-white"
                       />
                     </div>
                   </div>
@@ -162,7 +162,7 @@ const UserProfile = () => {
                       value={user.id}
                       readOnly
                       disabled
-                      className="w-full px-3 py-2 border rounded-md bg-muted"
+                      className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-800 text-gray-400"
                     />
                   </div>
                   <div>
@@ -174,7 +174,7 @@ const UserProfile = () => {
                       value={user.code}
                       onChange={(e) => handleInputChange('code', e.target.value)}
                       readOnly={!isEditing}
-                      className={`w-full px-3 py-2 border rounded-md ${!isEditing ? 'bg-muted' : ''}`}
+                      className={`w-full px-3 py-2 border border-gray-600 rounded-md ${!isEditing ? 'bg-gray-800 text-gray-400' : 'bg-gray-800 text-white'}`}
                     />
                   </div>
                   <div>
@@ -186,7 +186,7 @@ const UserProfile = () => {
                       value={user.name}
                       onChange={(e) => handleInputChange('name', e.target.value)}
                       readOnly={!isEditing}
-                      className={`w-full px-3 py-2 border rounded-md ${!isEditing ? 'bg-muted' : ''}`}
+                      className={`w-full px-3 py-2 border border-gray-600 rounded-md ${!isEditing ? 'bg-gray-800 text-gray-400' : 'bg-gray-800 text-white'}`}
                     />
                   </div>
                   <div>
@@ -198,7 +198,7 @@ const UserProfile = () => {
                       value={user.user}
                       onChange={(e) => handleInputChange('user', e.target.value)}
                       readOnly={!isEditing}
-                      className={`w-full px-3 py-2 border rounded-md ${!isEditing ? 'bg-muted' : ''}`}
+                      className={`w-full px-3 py-2 border border-gray-600 rounded-md ${!isEditing ? 'bg-gray-800 text-gray-400' : 'bg-gray-800 text-white'}`}
                     />
                   </div>
                   <div>
@@ -210,7 +210,7 @@ const UserProfile = () => {
                       value={user.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
                       readOnly={!isEditing}
-                      className={`w-full px-3 py-2 border rounded-md ${!isEditing ? 'bg-muted' : ''}`}
+                      className={`w-full px-3 py-2 border border-gray-600 rounded-md ${!isEditing ? 'bg-gray-800 text-gray-400' : 'bg-gray-800 text-white'}`}
                     />
                   </div>
                   <div>
@@ -222,7 +222,7 @@ const UserProfile = () => {
                       value={user.telephone}
                       onChange={(e) => handleInputChange('telephone', e.target.value)}
                       readOnly={!isEditing}
-                      className={`w-full px-3 py-2 border rounded-md ${!isEditing ? 'bg-muted' : ''}`}
+                      className={`w-full px-3 py-2 border border-gray-600 rounded-md ${!isEditing ? 'bg-gray-800 text-gray-400' : 'bg-gray-800 text-white'}`}
                     />
                   </div>
                   <div>
@@ -234,14 +234,14 @@ const UserProfile = () => {
                       value={user.password}
                       readOnly
                       disabled
-                      className="w-full px-3 py-2 border rounded-md bg-muted"
+                      className="w-full px-3 py-2 border border-gray-600 rounded-md bg-gray-800 text-gray-400"
                     />
                   </div>
                   <div>
                     <h3 className="text-sm font-medium text-muted-foreground mb-1">
                       Created At
                     </h3>
-                    <p>{formatDate(user.created_at)}</p>
+                    <p className="text-gray-400">{formatDate(user.created_at)}</p>
                   </div>
                 </div>
                 
