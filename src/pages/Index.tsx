@@ -1,4 +1,3 @@
-
 import Layout from "@/components/dashboard/Layout";
 import UsersTable from "@/components/dashboard/UsersTable";
 import { mockUsers } from "@/lib/mockData";
@@ -17,6 +16,11 @@ const Dashboard = () => {
         user.id === userId ? { ...user, status: newStatus } : user
       )
     );
+    
+    const userIndex = mockUsers.findIndex(user => user.id === userId);
+    if (userIndex !== -1) {
+      mockUsers[userIndex].status = newStatus;
+    }
     
     toast.success(`User status updated successfully!`, {
       description: `User ID: ${userId}`,
